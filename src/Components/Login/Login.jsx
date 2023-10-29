@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
 
 
 const Login = () => {
     const { loginIn } = useContext(AuthContext);
-    // const [error, setError] = useState('');
-
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location);
     const handelLogIn = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -25,6 +26,7 @@ const Login = () => {
                         icon: 'success',
                         confirmButtonText: 'OK'
                     })
+                    navigate(location?.state ? location?.state : "/")
                 }
 
             })
